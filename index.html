@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#0060af">
+  <base href="/elba/">
+  <title>ELBA — podgląd dla PRESCOT</title>
+  <link rel="stylesheet" href="gate.css">
+  <script src="gate.js" defer></script>
+</head>
+<body>
+  <main class="gate">
+    <div class="gate-top"><img class="wordmark" src="gate-logo.png" alt="ELBA Lighting technology" width="951" height="115"><span class="distribution">Polska dystrybucja<br><strong>PRESCOT LED</strong></span></div>
+    <div class="gate-content">
+      <p class="eyebrow">TECHNOLOGIA ŚWIATŁA</p>
+      <h1>Dobre światło.<br>Od środka.</h1>
+      <p class="intro">Zapraszamy do podglądu katalogu ELBA.<br>Wpisz hasło, aby wejść na stronę.</p>
+      <form id="unlock-form">
+        <label for="preview-password">Hasło do podglądu</label>
+        <div class="password-field"><input id="preview-password" name="password" type="password" autocomplete="current-password" required aria-describedby="unlock-status"><button type="button" class="reveal" aria-label="Pokaż hasło" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+        <button type="submit" class="unlock"><span>Otwórz podgląd</span><svg viewBox="0 0 28 20" aria-hidden="true"><path d="M2 10h23m-7-7 7 7-7 7"/></svg></button>
+        <p id="unlock-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <footer>ELBA · Timișoara, Rumunia · Od 1921 roku<span>Dostęp do podglądu jest szyfrowany.</span></footer>
+  </main>
+  <aside class="light-study" aria-hidden="true"><div class="beam beam-one"></div><div class="beam beam-two"></div><div class="beam beam-three"></div><div class="study-caption"><span>OD WNĘTRZA<br>PO CAŁE MIASTO.</span><span>ELBA × PRESCOT</span></div></aside>
+  <noscript>Do otwarcia zaszyfrowanego podglądu potrzebna jest obsługa JavaScript.</noscript>
+</body>
+</html>
