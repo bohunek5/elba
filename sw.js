@@ -1,5 +1,5 @@
 'use strict';
-const CONFIG = {"version":1,"build":"6e9ac886a859cc7e0ae054d7","salt":"SQRJgHc8J+tqdUoQ0Exz9rk2rLsv0DOa6J6+1iLK5mw=","iterations":600000,"manifest":"payload/a1a451a4aa3ea0738289261fa51bdeb5ac28da72e6a59b2c1ee55afb8cdd11d5.bin","scope":"/elba/"};
+const CONFIG = {"version":1,"build":"2ed1b3b789bb29674ce5e7f0","salt":"3LUeejgSigNd2xMimiJC35VBqugJe3LYvfgUpiQGbS4=","iterations":600000,"manifest":"payload/46b9fd73bfe8878067db8bb635f3d855218e8ee170a2726f990681be68477397.bin","scope":"/elba/"};
 const PUBLIC = new Set(['gate.js','gate.css','preview-config.json','sw.js','robots.txt','.nojekyll','gate-logo.png','gate-font-5.woff2','gate-font-6.woff2','gate-font-9.woff2','gate-font-10.woff2']);
 const BASE = new URL(CONFIG.scope, self.location.origin);
 const encoder = new TextEncoder();
