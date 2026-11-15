@@ -1,9 +1,8 @@
 'use strict';
-const CONFIG = {"version":1,"build":"98fa9c55c439457ea01a3aed","salt":"3kXbJL9/6Lx40slZrpJGGNBnaR8eUNA5yel3ixyu3AU=","iterations":600000,"manifest":"payload/8af08829d47158648487830f8a2e50220f50ce0dc9082774192b5d05b4d3ff9d.bin","scope":"/elba/"};
+const CONFIG = {"version":1,"build":"bc1043d69a810623d2cf9ee3","salt":"3kXbJL9/6Lx40slZrpJGGNBnaR8eUNA5yel3ixyu3AU=","iterations":600000,"manifest":"payload/b673cd262af9fe3475222c07ba5d4355253610e52ae1a24159cc8141e81654fe.bin","scope":"/elba/"};
 const PUBLIC = new Set(['gate.js','gate.css','preview-config.json','sw.js','robots.txt','.nojekyll','gate-logo.png','gate-font-5.woff2','gate-font-6.woff2','gate-font-9.woff2','gate-font-10.woff2']);
 const BASE = new URL(CONFIG.scope, self.location.origin);
 const encoder = new TextEncoder();
-const aad = encoder.encode(CONFIG.build);
 const authorized = new Set();
 let context = null, recovering = null, lockEpoch = 0, explicitlyLocked = false;
 const decodeKey = raw => Uint8Array.from(atob(raw), c => c.charCodeAt(0));
@@ -13,11 +12,11 @@ const noStore = {'Cache-Control':'no-store, private','X-Robots-Tag':'noindex, no
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 
-async function decrypt(file, key) {
+async function decrypt(file, key, fileAAD = CONFIG.build) {
   const response = await fetch(new URL(file, BASE), {cache:'no-store',credentials:'omit'});
   if (!response.ok) throw new Error('network');
   const sealed = new Uint8Array(await response.arrayBuffer());
-  return crypto.subtle.decrypt({name:'AES-GCM',iv:sealed.slice(0,12),additionalData:aad}, key, sealed.slice(12));
+  return crypto.subtle.decrypt({name:'AES-GCM',iv:sealed.slice(0,12),additionalData:encoder.encode(fileAAD)}, key, sealed.slice(12));
 }
 async function openKey(raw) {
   let key;
@@ -38,7 +37,7 @@ async function readFile(entry, active) {
     return existing;
   }
   if (active.pending.has(entry.file)) return active.pending.get(entry.file);
-  const task = decrypt(entry.file,active.key).then(plain => {
+  const task = decrypt(entry.file,active.key,entry.aad || CONFIG.build).then(plain => {
     const limit = 48 * 1024 * 1024;
     if (plain.byteLength <= limit) {
       while (active.memoryBytes + plain.byteLength > limit && active.buffers.size) {
